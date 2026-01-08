@@ -1,7 +1,5 @@
 streamlit
 rembg
-onnxruntime
-Pillow==10.0.0
-numpy<2.0.0
-streamlit-lottie
+Pillow
 requests
+streamlit-lottie
