@@ -8,74 +8,60 @@ import traceback
 # 1. 頁面配置
 st.set_page_config(page_title="AI Pro ID Photo", page_icon="👤", layout="wide")
 
-# 2. 注入自定義 CSS 樣式
+# 2. 注入修正版 CSS
 def inject_custom_css():
     st.markdown("""
     <style>
-        /* 整體背景色 */
+        /* 強制全局背景與文字顏色，防止深色模式衝突 */
         .stApp {
-            background-color: #fcfcfc;
+            background-color: #f8fafc !important;
+            color: #1e293b !important;
         }
         
-        /* 側邊欄美化 */
+        /* 確保所有標籤、段落、span、Markdown 文字都是深色 */
+        .stApp p, .stApp span, .stApp label, .stApp h1, .stApp h2, .stApp h3, .stApp li {
+            color: #1e293b !important;
+        }
+
+        /* 側邊欄背景與文字 */
         section[data-testid="stSidebar"] {
             background-color: #ffffff !important;
-            border-right: 1px solid #e6e9ef;
+            border-right: 1px solid #e2e8f0;
         }
-        
-        /* 標題樣式 */
-        h1 {
-            color: #1e293b;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            padding-bottom: 20px;
+        section[data-testid="stSidebar"] .stText, section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p {
+            color: #1e293b !important;
         }
-        
-        /* 按鈕美化 (下載按鈕特別強化) */
+
+        /* 檔案上傳區塊文字 */
+        .stApp [data-testid="stFileUploadDropzone"] div div {
+            color: #475569 !important;
+        }
+
+        /* 按鈕樣式 */
         .stButton>button {
             width: 100%;
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            background-color: #ffffff;
-            color: #475569;
+            border: 1px solid #cbd5e1 !important;
+            background-color: #ffffff !important;
+            color: #1e293b !important;
             font-weight: 600;
-            padding: 0.6rem;
-            transition: all 0.3s ease;
         }
         
-        .stButton>button:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
-        }
-        
-        /* 下載按鈕 (Primary Button) 樣式自定義 */
-        /* 注意：Streamlit 下載按鈕有特殊類別 */
+        /* 下載按鈕 (強烈藍色) */
         div.stDownloadButton > button {
-            background-color: #3b82f6 !important;
-            color: white !important;
+            background-color: #2563eb !important;
+            color: #ffffff !important;
             border: none !important;
         }
-        
-        div.stDownloadButton > button:hover {
-            background-color: #2563eb !important;
-            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3) !important;
-        }
 
-        /* 檔案上傳區塊美化 */
-        section[data-testid="stFileUploadDropzone"] {
-            border: 2px dashed #cbd5e1;
-            border-radius: 12px;
-            background-color: #f8fafc;
-        }
-        
-        /* 強化卡片感 */
+        /* 右側指南卡片 */
         .result-card {
-            background-color: white;
+            background-color: #ffffff;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            color: #1e293b !important;
         }
     </style>
     """, unsafe_allow_html=True)
