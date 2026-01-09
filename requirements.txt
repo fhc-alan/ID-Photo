@@ -1,5 +1,7 @@
 streamlit
-rembg
+rembg[cpu]
+onnxruntime
 Pillow
 requests
 streamlit-lottie
+opencv-python-headless
